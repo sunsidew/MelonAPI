@@ -81,10 +81,7 @@ public class MainActivity extends Activity implements OnClickListener {
     		//response.getStatusCode() + "\n" + 
     		handler.post(new Runnable() {
     			public void run() {
-    				tv.setText(result);
-
     				parse(result);
-    				
     				MelonChart melonchart = new MelonChart("a857db0d-38f7-3375-a5ad-4d4b306a8945");
     			}
     		});
@@ -97,7 +94,7 @@ public class MainActivity extends Activity implements OnClickListener {
     	
     	map.put("version", "1");
     	map.put("page", "1");
-    	map.put("count", "5");
+    	map.put("count", "10");
     	
     	RequestBundle req = new RequestBundle();
     	req.setUrl(URL);
@@ -127,12 +124,6 @@ public class MainActivity extends Activity implements OnClickListener {
 			JSONObject jsonobj = new JSONObject(result);
 			
 			String depth[] = {"melon", "songs"};
-			String param[] = {"songId","songName",
-							"artistId","artistName",
-							"albumId","albumName",
-							"currentRank","pastRank",
-							"playTime","issueDate",
-							"isTitleSong","isHitSong","isAdult","isFree"};
 			
 			JsonParse jp = new JsonParse();
 			jsonobj = jp.mineJsonobj(jsonobj, depth);
@@ -142,23 +133,30 @@ public class MainActivity extends Activity implements OnClickListener {
 			
 			for(int i = 0 ; i < musics.length() ; i++) {
 				JSONArray artist = jp.mineJsonobj(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
+				tv.setText(tv.getText() + "\n" + 
+						musics.getJSONObject(i).getString("songId")+
+						musics.getJSONObject(i).getString("songName")+
+						musics.getJSONObject(i).getString("albumId")+
+						musics.getJSONObject(i).getString("albumName")
+						);
+				// 이렇게 일일히...
 				
-				Song song = new Song(
-					musics.getJSONObject(i).getString("songId"),
-					musics.getJSONObject(i).getString("songName"),
-					artist.getJSONObject(0).getString("artistId"),
-					artist.getJSONObject(0).getString("artistName"),
-					musics.getJSONObject(i).getString("albumId"),
-					musics.getJSONObject(i).getString("albumName"),
-					musics.getJSONObject(i).getInt("currentRank"),
-					musics.getJSONObject(i).getInt("pastRank"),
-					musics.getJSONObject(i).getInt("playTime"),
-					musics.getJSONObject(i).getString("issueDate"),
-					musics.getJSONObject(i).getBoolean("isTitleSong"),
-					musics.getJSONObject(i).getBoolean("isHitSong"),
-					musics.getJSONObject(i).getBoolean("isAdult"),
-					musics.getJSONObject(i).getBoolean("isFree")
-				);
+//				Song song = new Song(
+//					musics.getJSONObject(i).getString("songId"),
+//					musics.getJSONObject(i).getString("songName"),
+//					artist.getJSONObject(0).getString("artistId"),
+//					artist.getJSONObject(0).getString("artistName"),
+//					musics.getJSONObject(i).getString("albumId"),
+//					musics.getJSONObject(i).getString("albumName"),
+//					musics.getJSONObject(i).getInt("currentRank"),
+//					musics.getJSONObject(i).getInt("pastRank"),
+//					musics.getJSONObject(i).getInt("playTime"),
+//					musics.getJSONObject(i).getString("issueDate"),
+//					musics.getJSONObject(i).getBoolean("isTitleSong"),
+//					musics.getJSONObject(i).getBoolean("isHitSong"),
+//					musics.getJSONObject(i).getBoolean("isAdult"),
+//					musics.getJSONObject(i).getBoolean("isFree")
+//				);
 					
 				//result.add(song);
 			}
