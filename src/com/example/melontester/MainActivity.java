@@ -3,6 +3,7 @@ package com.example.melontester;
 import java.util.ArrayList;
 
 import org.nhnnext.MelonAPI.Album;
+import org.nhnnext.MelonAPI.Genre;
 import org.nhnnext.MelonAPI.MelonChart;
 import org.nhnnext.MelonAPI.Song;
 
@@ -36,11 +37,11 @@ public class MainActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.button1:
 			MelonChart melonchart = new MelonChart("a857db0d-38f7-3375-a5ad-4d4b306a8945");
-			//ArrayList<Song> GenreList
+			ArrayList<Genre> GenreList = melonchart.getGenreList();
 			//ArrayList<Song> GenreChartList = melonchart.getGenreChart("DP0800",1,5);
 			//ArrayList<Song> nonGenreChartList = melonchart.getnonGenreChart(1,5);
 			//ArrayList<Song> dailyChartList = melonchart.getdailyChart(1,5);
-			ArrayList<Album> AlbumChartList = melonchart.getalbumChart(1,5);
+			//ArrayList<Album> AlbumChartList = melonchart.getalbumChart(1,5);
 			//ArrayList<Song> realTimeChartList = melonchart.getRealTimeChart(1,5);
 			Log.i("test","start!");
 			/*for(Song song : GenreChartList) {
@@ -48,11 +49,15 @@ public class MainActivity extends Activity implements OnClickListener {
 				  Log.i("test",song.getSongName());
 				  Log.i("test",song.getArtistName());
 			}*/
-			for(Album album : AlbumChartList) {
+			/*for(Album album : AlbumChartList) {
 				  Log.i("test",album.getRepSongName());
 				  Log.i("test",album.getAlbumName());
 				  Log.i("test",album.getAlbumType());
 				  Log.i("test",album.getArtistName());
+			}*/
+			for(Genre genre : GenreList) {
+				Log.i("test",genre.getGenreId());
+				Log.i("test",genre.getGenreName());
 			}
 			Log.i("test","end!");
 		}
