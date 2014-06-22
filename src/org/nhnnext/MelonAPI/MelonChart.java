@@ -377,4 +377,54 @@ public class MelonChart {
 		
 		return result;
 	}
+
+	public ArrayList<Genre> getGenreList() {
+		ArrayList<Genre> result = new ArrayList<Genre>();
+		
+		map.put("version", "1");
+    	
+    	String URL = "http://apis.skplanetx.com/melon/genres";
+    	
+    	RequestBundle req = new RequestBundle();
+    	req.setUrl(URL);
+    	req.setParameters(map);
+    	req.setHttpMethod(HttpMethod.GET);
+		req.setResponseType(CONTENT_TYPE.JSON);
+		
+		try {
+    	    api.request(req,listener);
+    	} catch(PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	}
+		
+		while(apiresult.equals(""))
+		{
+			Log.i("test", "");
+		}
+		
+		String depth[] = {"melon", "genres"};
+		try {
+			Log.i("test","apiresult:" + apiresult);
+			JSONObject jsonobj = new JSONObject(apiresult);
+			
+			JsonParse jp = new JsonParse();
+			jsonobj = jp.stripJson(jsonobj, depth);
+			
+			JSONArray genres = jsonobj.getJSONArray("genre");
+						
+			for(int i = 0 ; i < genres.length() ; i++) {
+				Genre genre = new Genre(
+					genres.getJSONObject(i).getString("genreId"),
+					genres.getJSONObject(i).getString("genreName")
+				);
+					
+				result.add(genre);
+			}
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
 }
