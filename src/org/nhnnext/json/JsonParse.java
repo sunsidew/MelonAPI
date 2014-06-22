@@ -1,10 +1,10 @@
-package org.nhnnext.MelonAPI;
+package org.nhnnext.json;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MineJsonObject {
-	public static JSONObject mineJsonobj (JSONObject inputjson, String[] depth) {
+public class JsonParse {
+	public JSONObject stripJson (JSONObject inputjson, String[] depth) {
 		String jsonstr = "";
 		JSONObject jsonobj = inputjson;
 		
