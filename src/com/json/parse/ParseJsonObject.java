@@ -1,10 +1,10 @@
-package org.nhnnext.json;
+package com.json.parse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JsonParse {
-	public JSONObject stripJson (JSONObject inputjson, String[] depth) {
+public class ParseJsonObject {
+	public JSONObject trimJobj (JSONObject inputjson, String[] depth) {
 		String jsonstr = "";
 		JSONObject jsonobj = inputjson;
 		

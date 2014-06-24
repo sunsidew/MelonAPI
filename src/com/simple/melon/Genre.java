@@ -1,4 +1,4 @@
-package org.simple.melon;
+package com.simple.melon;
 
 public class Genre {
 	private String genreName;

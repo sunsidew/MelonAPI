@@ -2,13 +2,13 @@ package com.example.melontester;
 
 import java.util.ArrayList;
 
-import org.simple.melon.Album;
-import org.simple.melon.Artist;
-import org.simple.melon.Genre;
-import org.simple.melon.MelonChart;
-import org.simple.melon.MelonLatest;
-import org.simple.melon.MelonSearch;
-import org.simple.melon.Song;
+import com.simple.melon.Album;
+import com.simple.melon.Artist;
+import com.simple.melon.Genre;
+import com.simple.melon.MelonChart;
+import com.simple.melon.MelonLatest;
+import com.simple.melon.MelonSearch;
+import com.simple.melon.Song;
 
 import android.app.Activity;
 import android.os.Bundle;
