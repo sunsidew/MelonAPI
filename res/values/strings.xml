@@ -4,5 +4,7 @@
     <string name="app_name">melontester</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    
+    <string name="api_app_key">a857db0d-38f7-3375-a5ad-4d4b306a8945</string>
 
 </resources>
