@@ -1,4 +1,4 @@
-package org.simple.melon;
+package com.simple.melon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,10 +7,10 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.nhnnext.json.JsonParse;
 
 import android.util.Log;
 
+import com.json.parse.ParseJsonObject;
 import com.skp.openplatform.android.sdk.api.APIRequest;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.HttpMethod;
@@ -84,14 +84,14 @@ public class MelonChart {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
+			ParseJsonObject jp = new ParseJsonObject();
+			jsonobj = jp.trimJobj(jsonobj, depth);
 			
 			JSONArray musics = jsonobj.getJSONArray("song");
 			String artist_depth[] = {"artists"};
 						
 			for(int i = 0 ; i < musics.length() ; i++) {
-				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
+				JSONArray artist = jp.trimJobj(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
 				
 				Song song = new Song(
 					musics.getJSONObject(i).getString("songId"),
@@ -151,14 +151,14 @@ public class MelonChart {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
+			ParseJsonObject jp = new ParseJsonObject();
+			jsonobj = jp.trimJobj(jsonobj, depth);
 			
 			JSONArray musics = jsonobj.getJSONArray("song");
 			String artist_depth[] = {"artists"};
 						
 			for(int i = 0 ; i < musics.length() ; i++) {
-				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
+				JSONArray artist = jp.trimJobj(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
 				
 				Song song = new Song(
 					musics.getJSONObject(i).getString("songId"),
@@ -218,14 +218,14 @@ public class MelonChart {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
+			ParseJsonObject jp = new ParseJsonObject();
+			jsonobj = jp.trimJobj(jsonobj, depth);
 			
 			JSONArray musics = jsonobj.getJSONArray("song");
 			String artist_depth[] = {"artists"};
 						
 			for(int i = 0 ; i < musics.length() ; i++) {
-				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
+				JSONArray artist = jp.trimJobj(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
 				
 				Song song = new Song(
 					musics.getJSONObject(i).getString("songId"),
@@ -285,14 +285,14 @@ public class MelonChart {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
+			ParseJsonObject jp = new ParseJsonObject();
+			jsonobj = jp.trimJobj(jsonobj, depth);
 			
 			JSONArray musics = jsonobj.getJSONArray("song");
 			String artist_depth[] = {"artists"};
 						
 			for(int i = 0 ; i < musics.length() ; i++) {
-				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
+				JSONArray artist = jp.trimJobj(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
 				
 				Song song = new Song(
 					musics.getJSONObject(i).getString("songId"),
@@ -353,14 +353,14 @@ public class MelonChart {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
+			ParseJsonObject jp = new ParseJsonObject();
+			jsonobj = jp.trimJobj(jsonobj, depth);
 			
 			JSONArray albums = jsonobj.getJSONArray("album");
 			String artist_depth[] = {"artists"};
 						
 			for(int i = 0 ; i < albums.length() ; i++) {
-				JSONArray artist = jp.stripJson(albums.getJSONObject(i), artist_depth).getJSONArray("artist");
+				JSONArray artist = jp.trimJobj(albums.getJSONObject(i), artist_depth).getJSONArray("artist");
 				
 				Album album = new Album(
 					albums.getJSONObject(i).getString("albumId"),
@@ -416,8 +416,8 @@ public class MelonChart {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
+			ParseJsonObject jp = new ParseJsonObject();
+			jsonobj = jp.trimJobj(jsonobj, depth);
 			
 			JSONArray genres = jsonobj.getJSONArray("genre");
 						

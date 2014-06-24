@@ -1,4 +1,4 @@
-package org.simple.melon;
+package com.simple.melon;
 /**
  * 
  * @brief album data class
