@@ -17,7 +17,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-
+/**
+ * 
+ * @brief 인스턴스 생성 및 테스트
+ * @detail 테스트를 위한 모바일 뷰 및 관련 테스를 위한 임시 메소드
+ *
+ */
 public class MainActivity extends Activity implements OnClickListener {
 	Button btn;
 	TextView tv;

@@ -18,7 +18,16 @@ import com.skp.openplatform.android.sdk.common.PlanetXSDKException;
 import com.skp.openplatform.android.sdk.common.RequestBundle;
 import com.skp.openplatform.android.sdk.common.RequestListener;
 import com.skp.openplatform.android.sdk.common.ResponseMessage;
-
+/**
+ * 
+ * @brief 차트 관련 검색
+ * @detail 현재 차트 순위에 나오는 곡에 대한 정보를 가져온다.
+ * getRealTimeChart 실시간 차트를 가져온다.
+ * getdailyChart 데일리 차트를 가져온다.
+ * getGenreChart 장르 차트를 가져온다.
+ * getalbumChart 앨범 차트를 가져온다.
+ *
+ */
 public class MelonChart {
 	APIRequest api = new APIRequest();
 	Map<String, Object> map = new HashMap<String, Object>();

@@ -18,7 +18,16 @@ import com.skp.openplatform.android.sdk.common.RequestListener;
 import com.skp.openplatform.android.sdk.common.ResponseMessage;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.HttpMethod;
-
+/**
+ * 
+ * @brief 앨범/곡 관련 검색
+ * @detail 사용자가 입력한 키워드에 따라서 검색한 결과를 가져온다.
+ * getSearchAlbum 앨범 검색결과를 가져온다.
+ * getSearchArtist 아티스트 검색결과를 가져온다.
+ * getSearchSong 곡 검색결과를 가져온다.
+ * getLastetSongByGenre 장르별 최신곡을 가져온다.
+ *
+ */
 public class MelonSearch {
 	APIRequest api = new APIRequest();
 	Map<String, Object> map = new HashMap<String, Object>();

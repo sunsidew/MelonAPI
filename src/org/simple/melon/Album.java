@@ -1,5 +1,10 @@
 package org.simple.melon;
-
+/**
+ * 
+ * @brief album data class
+ * @detail 앨범 정보가 가지고 있는 자료형에 맞는 생성자 및 각각의 자료들을 가진다.
+ *
+ */
 public class Album {
 	private String albumId;
 	private String albumName;

@@ -18,7 +18,16 @@ import com.skp.openplatform.android.sdk.common.RequestListener;
 import com.skp.openplatform.android.sdk.common.ResponseMessage;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.HttpMethod;
-
+/**
+ * 
+ * @brief 최신 앨범/곡 관련 검색
+ * @detail 현재 최신 앨범/곡에 대한 정보를 가져온다.
+ * getLatestAlbum 최신 앨범을 가져온다.
+ * getLatestAlbumByGenre 장르별 최신앨범을 가져온다.
+ * getLatestSong 최신곡을 가져온다.
+ * getLastetSongByGenre 장르별 최신곡을 가져온다.
+ *
+ */
 public class MelonLatest {
 	APIRequest api = new APIRequest();
 	Map<String, Object> map = new HashMap<String, Object>();
