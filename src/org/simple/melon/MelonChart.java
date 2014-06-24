@@ -1,4 +1,4 @@
-package org.nhnnext.MelonAPI;
+package org.simple.melon;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package org.nhnnext.MelonAPI;
+package org.simple.melon;
 
 public class Genre {
 	private String genreName;

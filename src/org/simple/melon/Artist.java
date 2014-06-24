@@ -1,4 +1,4 @@
-package org.nhnnext.MelonAPI;
+package org.simple.melon;
 
 public class Artist {
 	private String artistId;

@@ -1,4 +1,4 @@
-package org.nhnnext.MelonAPI;
+package org.simple.melon;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import com.skp.openplatform.android.sdk.common.ResponseMessage;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.HttpMethod;
 
-public class MelonLatest {
+public class MelonSearch {
 	APIRequest api = new APIRequest();
 	Map<String, Object> map = new HashMap<String, Object>();
 	
@@ -39,19 +39,20 @@ public class MelonLatest {
     	}
     };
 	
-	public MelonLatest(String app_key) {
+	public MelonSearch(String app_key) {
 		APIRequest.setAppKey(app_key);
 	}
 	
-	public ArrayList<Album> getLatestAlbum(int page, int count) {
+	public ArrayList<Album> getSearchAlbum(int page, int count, String searchKeyword) {
 		
 		ArrayList<Album> result = new ArrayList<Album>();
 		
 		map.put("version", "1");
     	map.put("page", page);
     	map.put("count", count);
+    	map.put("searchKeyword", searchKeyword);
 		
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/albums";
+    	String URL = "http://apis.skplanetx.com/melon/albums";
     	
     	RequestBundle req = new RequestBundle();
     	req.setUrl(URL);
@@ -80,7 +81,7 @@ public class MelonLatest {
 			jsonobj = jp.stripJson(jsonobj, depth);
 			
 			JSONArray musics = jsonobj.getJSONArray("album");
-			String artist_depth[] = {"repArtists"};
+			String artist_depth[] = {"artists"};
 						
 			for(int i = 0 ; i < musics.length() ; i++) {
 				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
@@ -88,12 +89,12 @@ public class MelonLatest {
 				Album album = new Album(
 					musics.getJSONObject(i).getString("albumId"),
 					musics.getJSONObject(i).getString("albumName"),
-					musics.getJSONObject(i).getString("repSongId"),
-					musics.getJSONObject(i).getString("repSongName"),
+					null,
+					null,
 					artist.getJSONObject(0).getString("artistId"),
 					artist.getJSONObject(0).getString("artistName"),
 					musics.getJSONObject(i).getString("issueDate"),
-					musics.getJSONObject(i).getString("totalSongCount"),
+					null,
 					musics.getJSONObject(i).getString("averageScore")
 				);
 					
@@ -107,75 +108,16 @@ public class MelonLatest {
 		return result;
 	}
 	
-	public ArrayList<Album> getLatestAlbumByGenre(String genreid, int page, int count) {
-		ArrayList<Album> result = new ArrayList<Album>();
+	public ArrayList<Artist> getSearchArtist(int page, int count, String searchKeyword) {
+		
+		ArrayList<Artist> result = new ArrayList<Artist>();
 		
 		map.put("version", "1");
     	map.put("page", page);
     	map.put("count", count);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/albums/" + genreid;
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
+    	map.put("searchKeyword", searchKeyword);
 		
-		try {
-    	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "albums"};
-		try {
-			Log.i("test","apiresult:" + apiresult);
-			JSONObject jsonobj = new JSONObject(apiresult);
-			
-			JsonParse jp = new JsonParse();
-			jsonobj = jp.stripJson(jsonobj, depth);
-			
-			JSONArray musics = jsonobj.getJSONArray("album");
-			String artist_depth[] = {"repArtists"};
-						
-			for(int i = 0 ; i < musics.length() ; i++) {
-				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
-				
-				Album album = new Album(
-						musics.getJSONObject(i).getString("albumId"),
-						musics.getJSONObject(i).getString("albumName"),
-						musics.getJSONObject(i).getString("repSongId"),
-						musics.getJSONObject(i).getString("repSongName"),
-						artist.getJSONObject(0).getString("artistId"),
-						artist.getJSONObject(0).getString("artistName"),
-						musics.getJSONObject(i).getString("issueDate"),
-						musics.getJSONObject(i).getString("totalSongCount"),
-						musics.getJSONObject(i).getString("averageScore")
-					);
-					
-				result.add(album);
-			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return result;
-	}
-	
-	public ArrayList<Song> getLatestSong(int page, int count) {
-		ArrayList<Song> result = new ArrayList<Song>();
-		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/songs";
+    	String URL = "http://apis.skplanetx.com/melon/artists";
     	
     	RequestBundle req = new RequestBundle();
     	req.setUrl(URL);
@@ -194,7 +136,8 @@ public class MelonLatest {
 			Log.i("test", "");
 		}
 		
-		String depth[] = {"melon", "songs"};
+		String depth[] = {"melon", "artists"};
+		
 		try {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
@@ -202,47 +145,39 @@ public class MelonLatest {
 			JsonParse jp = new JsonParse();
 			jsonobj = jp.stripJson(jsonobj, depth);
 			
-			JSONArray musics = jsonobj.getJSONArray("song");
-			String artist_depth[] = {"artists"};
+			JSONArray musics = jsonobj.getJSONArray("artist");
 						
 			for(int i = 0 ; i < musics.length() ; i++) {
-				JSONArray artist = jp.stripJson(musics.getJSONObject(i), artist_depth).getJSONArray("artist");
 				
-				Song song = new Song(
-					musics.getJSONObject(i).getString("songId"),
-					musics.getJSONObject(i).getString("songName"),
-					artist.getJSONObject(0).getString("artistId"),
-					artist.getJSONObject(0).getString("artistName"),
-					musics.getJSONObject(i).getString("albumId"),
-					musics.getJSONObject(i).getString("albumName"),
-					0,
-					0,
-					musics.getJSONObject(i).getInt("playTime"),
-					musics.getJSONObject(i).getString("issueDate"),
-					musics.getJSONObject(i).getBoolean("isTitleSong"),
-					musics.getJSONObject(i).getBoolean("isHitSong"),
-					musics.getJSONObject(i).getBoolean("isAdult"),
-					musics.getJSONObject(i).getBoolean("isFree")
+				Artist artist = new Artist(
+					musics.getJSONObject(i).getString("artistId"),
+					musics.getJSONObject(i).getString("artistName"),
+					musics.getJSONObject(i).getString("sex"),
+					musics.getJSONObject(i).getString("nationalityName"),
+					musics.getJSONObject(i).getString("actTypeName"),
+					musics.getJSONObject(i).getString("genreNames")
 				);
 					
-				result.add(song);
+				result.add(artist);
 			}
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+    	
 		return result;
 	}
 	
-	public ArrayList<Song> getLastetSongByGenre(String genreid, int page, int count) {
+	public ArrayList<Song> getSearchSong(int page, int count, String searchKeyword) {
+		
 		ArrayList<Song> result = new ArrayList<Song>();
 		
 		map.put("version", "1");
     	map.put("page", page);
     	map.put("count", count);
+    	map.put("searchKeyword", searchKeyword);
     	
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/songs/" + genreid;
+    	String URL = "http://apis.skplanetx.com/melon/songs";
     	
     	RequestBundle req = new RequestBundle();
     	req.setUrl(URL);

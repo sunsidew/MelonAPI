@@ -2,13 +2,13 @@ package com.example.melontester;
 
 import java.util.ArrayList;
 
-import org.nhnnext.MelonAPI.Album;
-import org.nhnnext.MelonAPI.Artist;
-import org.nhnnext.MelonAPI.Genre;
-import org.nhnnext.MelonAPI.MelonChart;
-import org.nhnnext.MelonAPI.MelonLatest;
-import org.nhnnext.MelonAPI.MelonSearch;
-import org.nhnnext.MelonAPI.Song;
+import org.simple.melon.Album;
+import org.simple.melon.Artist;
+import org.simple.melon.Genre;
+import org.simple.melon.MelonChart;
+import org.simple.melon.MelonLatest;
+import org.simple.melon.MelonSearch;
+import org.simple.melon.Song;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,7 +21,6 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements OnClickListener {
 	Button btn;
 	TextView tv;
-	String appkey = getString(R.string.api_app_key);   
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {   	
@@ -40,19 +39,21 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button1:
+			String appkey = getString(R.string.api_app_key);
+			
 			Log.e("test", "아래는 테스트 코드입니다.");
-			MelonSearch melonsearch = new MelonSearch(api_app_key);
+			MelonSearch melonsearch = new MelonSearch(appkey);
 			ArrayList<Album> SearchAlbum = melonsearch.getSearchAlbum(1, 5, "hi");
 			ArrayList<Song> SearchSong = melonsearch.getSearchSong(1, 10, "hi");
 			ArrayList<Artist> SearchArtist = melonsearch.getSearchArtist(1, 10, "버스커");
-//			
-//			MelonLatest melonlatest = new MelonLatest(api_app_key);
+			
+//			MelonLatest melonlatest = new MelonLatest(appkey);
 //			ArrayList<Album> LatestAlbumList = melonlatest.getLatestAlbum(1,5);
 //			ArrayList<Album> LatestAlbumByGenre = melonlatest.getLatestAlbumByGenre("DP0500", 1, 5);
 //			ArrayList<Song> LatestSong = melonlatest.getLatestSong(1, 10);
 //			ArrayList<Song> LastetSongByGenre = melonlatest.getLastetSongByGenre("DP0800", 1, 10);
 //			
-//			MelonChart melonchart = new MelonChart(api_app_key);
+//			MelonChart melonchart = new MelonChart(appkey);
 //			ArrayList<Genre> GenreList = melonchart.getGenreList();
 //			ArrayList<Song> GenreChartList = melonchart.getGenreChart("DP0800",1,5);
 //			ArrayList<Song> nonGenreChartList = melonchart.getnonGenreChart(1,5);
