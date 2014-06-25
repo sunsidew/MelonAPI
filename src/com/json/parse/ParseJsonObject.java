@@ -10,10 +10,10 @@ import org.json.JSONObject;
  */
 public class ParseJsonObject {
 	public JSONObject trimJobj (JSONObject inputjson, String[] depth) {
-		String jsonstr = "";
-		JSONObject jsonobj = inputjson;
-		
-		try {	
+		try {
+			String jsonstr = "";
+			JSONObject jsonobj = inputjson;
+			
 			for(int i = 0 ; i < depth.length ; i++)
 			{
 				jsonstr = jsonobj.getString(depth[i]);
@@ -22,7 +22,9 @@ public class ParseJsonObject {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} catch (Exception e) {
+			e.getMessage();
+		}		
 		
 		return jsonobj;
 	}

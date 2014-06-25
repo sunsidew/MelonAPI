@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import android.util.Log;
 
+import com.json.parse.Exception;
 import com.json.parse.ParseJsonObject;
 import com.skp.openplatform.android.sdk.api.APIRequest;
 import com.skp.openplatform.android.sdk.common.PlanetXSDKConstants.CONTENT_TYPE;
@@ -29,11 +30,15 @@ import com.skp.openplatform.android.sdk.common.ResponseMessage;
  *
  */
 public class MelonChart {
-	APIRequest api = new APIRequest();
-	Map<String, Object> map = new HashMap<String, Object>();
-	
-	String apiresult = "";
-	String apistatuscode = "";
+	try{
+		APIRequest api = new APIRequest();
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		String apiresult = "";
+		String apistatuscode = "";
+	catch (Exception e) {
+		e.getMessage();
+	}
 	
 	RequestListener listener = new RequestListener() {
     	@Override
@@ -53,35 +58,29 @@ public class MelonChart {
 	}
 	
 	public ArrayList<Song> getRealTimeChart(int page, int count) {
+		try{
+			ArrayList<Song> result = new ArrayList<Song>();
+			
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	
+	    	String URL = "http://apis.skplanetx.com/melon/charts/realtime";
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
+			
+			api.request(req,listener);
 		
-		ArrayList<Song> result = new ArrayList<Song>();
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/charts/realtime";
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
-		try {
-    	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
-		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "songs"};
-		try {
-			Log.i("test","apiresult:" + apiresult);
+			String depth[] = {"melon", "songs"};
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
 			ParseJsonObject jp = new ParseJsonObject();
@@ -111,10 +110,14 @@ public class MelonChart {
 				);
 					
 				result.add(song);
+			} catch(PlanetXSDKException e) {
+	    	    e.printStackTrace();
+	    	} catch (JSONException e) {
+	    		e.printStackTrace();
+	    	} catch (Exception e) {
+					e.getMessage();
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			// TODO Auto-generated catch block	
 		}
 		
 		return result;
