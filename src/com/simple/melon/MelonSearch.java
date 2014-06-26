@@ -49,40 +49,35 @@ public class MelonSearch {
     };
 	
 	public MelonSearch(String app_key) {
-		APIRequest.setAppKey(app_key);
+		APIRequest.setAppKey(app_key); 
 	}
 	
 	public ArrayList<Album> getSearchAlbum(int page, int count, String searchKeyword) {
 		
 		ArrayList<Album> result = new ArrayList<Album>();
+		try{
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	map.put("searchKeyword", searchKeyword);
+			
+	    	String URL = "http://apis.skplanetx.com/melon/albums";
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	map.put("searchKeyword", searchKeyword);
-		
-    	String URL = "http://apis.skplanetx.com/melon/albums";
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
-		try {
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
+	 		
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "albums"};
 		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "albums"};
-		
-		try {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -109,9 +104,12 @@ public class MelonSearch {
 					
 				result.add(album);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
     	
 		return result;
@@ -121,33 +119,29 @@ public class MelonSearch {
 		
 		ArrayList<Artist> result = new ArrayList<Artist>();
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	map.put("searchKeyword", searchKeyword);
-		
-    	String URL = "http://apis.skplanetx.com/melon/artists";
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
-		try {
+		try{
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	map.put("searchKeyword", searchKeyword);
+			
+	    	String URL = "http://apis.skplanetx.com/melon/artists";
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
+
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
 		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "artists"};
-		
-		try {
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "artists"};
+			
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -169,9 +163,12 @@ public class MelonSearch {
 					
 				result.add(artist);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
     	
 		return result;
@@ -181,32 +178,30 @@ public class MelonSearch {
 		
 		ArrayList<Song> result = new ArrayList<Song>();
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	map.put("searchKeyword", searchKeyword);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/songs";
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
+		try{
+				
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	map.put("searchKeyword", searchKeyword);
+	    	
+	    	String URL = "http://apis.skplanetx.com/melon/songs";
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
 		
-		try {
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
-		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "songs"};
-		try {
+	    	
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "songs"};
+			
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -238,9 +233,12 @@ public class MelonSearch {
 					
 				result.add(song);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
 		
 		return result;

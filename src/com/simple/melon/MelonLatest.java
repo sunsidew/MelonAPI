@@ -56,32 +56,29 @@ public class MelonLatest {
 		
 		ArrayList<Album> result = new ArrayList<Album>();
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-		
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/albums";
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
-		try {
+		try{
+				
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+			
+	    	String URL = "http://apis.skplanetx.com/melon/newreleases/albums";
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
+			
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
-		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "albums"};
-		
-		try {
+			
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "albums"};
+			
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -108,9 +105,12 @@ public class MelonLatest {
 					
 				result.add(album);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
     	
 		return result;
@@ -119,30 +119,29 @@ public class MelonLatest {
 	public ArrayList<Album> getLatestAlbumByGenre(String genreid, int page, int count) {
 		ArrayList<Album> result = new ArrayList<Album>();
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/albums/" + genreid;
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
 		try {
+				
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	
+	    	String URL = "http://apis.skplanetx.com/melon/newreleases/albums/" + genreid;
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
+			
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
+ 
+    	    while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "albums"};
 		
-		String depth[] = {"melon", "albums"};
-		try {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -169,9 +168,12 @@ public class MelonLatest {
 					
 				result.add(album);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
 		
 		return result;
@@ -179,32 +181,28 @@ public class MelonLatest {
 	
 	public ArrayList<Song> getLatestSong(int page, int count) {
 		ArrayList<Song> result = new ArrayList<Song>();
+		try{
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	
+	    	String URL = "http://apis.skplanetx.com/melon/newreleases/songs";
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/songs";
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
-		try {
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
+	    	
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "songs"};
 		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "songs"};
-		try {
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -236,9 +234,12 @@ public class MelonLatest {
 					
 				result.add(song);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
 		
 		return result;
@@ -247,31 +248,28 @@ public class MelonLatest {
 	public ArrayList<Song> getLastetSongByGenre(String genreid, int page, int count) {
 		ArrayList<Song> result = new ArrayList<Song>();
 		
-		map.put("version", "1");
-    	map.put("page", page);
-    	map.put("count", count);
-    	
-    	String URL = "http://apis.skplanetx.com/melon/newreleases/songs/" + genreid;
-    	
-    	RequestBundle req = new RequestBundle();
-    	req.setUrl(URL);
-    	req.setParameters(map);
-    	req.setHttpMethod(HttpMethod.GET);
-		req.setResponseType(CONTENT_TYPE.JSON);
-		
 		try {
+			map.put("version", "1");
+	    	map.put("page", page);
+	    	map.put("count", count);
+	    	
+	    	String URL = "http://apis.skplanetx.com/melon/newreleases/songs/" + genreid;
+	    	
+	    	RequestBundle req = new RequestBundle();
+	    	req.setUrl(URL);
+	    	req.setParameters(map);
+	    	req.setHttpMethod(HttpMethod.GET);
+			req.setResponseType(CONTENT_TYPE.JSON);
+		
     	    api.request(req,listener);
-    	} catch(PlanetXSDKException e) {
-    	    e.printStackTrace();
-    	}
-		
-		while(apiresult.equals(""))
-		{
-			Log.i("test", "");
-		}
-		
-		String depth[] = {"melon", "songs"};
-		try {
+	    	
+			while(apiresult.equals(""))
+			{
+				Log.i("test", "");
+			}
+			
+			String depth[] = {"melon", "songs"};
+			
 			Log.i("test","apiresult:" + apiresult);
 			JSONObject jsonobj = new JSONObject(apiresult);
 			
@@ -303,9 +301,12 @@ public class MelonLatest {
 					
 				result.add(song);
 			}
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (PlanetXSDKException e) {
+    	    e.printStackTrace();
+    	} catch (JSONException e) {
+    		e.printStackTrace();
+    	} catch (Exception e) {
+			e.getMessage();
 		}
 		
 		return result;
